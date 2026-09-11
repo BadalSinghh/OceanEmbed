@@ -25,6 +25,7 @@ Reconstructing 15 subsurface depth levels ($0\text{--}1000\text{ m}$) across the
 | **CNN Baseline** | **191,631** | **1.1611** | **0.6834** | **0.9912** | **1.1796** |
 | **CBAM-CNN (Attention)** | 195,705 | 1.3777 | 0.7905 | 0.9874 | 1.3531 |
 | **OceanEmbed (CNN+FNO2D)** | 8,670,241 | 1.7113 | 1.1496 | 0.9811 | 1.4736 |
+| **Climatology Baseline** | 0 | 2.0253 | 1.2297 | 0.9766 | 1.8730 |
 
 - **Validation Dataset**: 253 unique QC-passed CORA delayed-mode Argo profiles comprising 3,509 matched depth observations across the held-out test period (2023-09-14 to 2023-12-31).
 - **Core Finding**: Spaceborne multi-satellite surface observables contain strong dynamical signal ($R > 0.98$) to reconstruct full vertical thermal stratification from 0 to 1000m. CNN Baseline delivers the best overall accuracy, while CBAM-CNN achieves the highest surface mixed layer precision ($0\text{--}30\text{ m}$, $0.610^\circ\text{C}$).
