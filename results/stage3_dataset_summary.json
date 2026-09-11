@@ -1,0 +1,317 @@
+{
+  "stage": 3,
+  "generated_utc": "2026-09-10T19:40:17",
+  "region": {
+    "lat_min": 5.0,
+    "lat_max": 22.0,
+    "lon_min": 80.0,
+    "lon_max": 100.0
+  },
+  "grid": {
+    "lat_n": 69,
+    "lon_n": 81,
+    "resolution_deg": 0.25
+  },
+  "total_days": 730,
+  "date_range": {
+    "start": "2022-01-01",
+    "end": "2023-12-31"
+  },
+  "split": {
+    "train": {
+      "start": "2022-01-01",
+      "end": "2023-05-26",
+      "n_days": 511
+    },
+    "val": {
+      "start": "2023-05-27",
+      "end": "2023-09-13",
+      "n_days": 110
+    },
+    "test": {
+      "start": "2023-09-14",
+      "end": "2023-12-31",
+      "n_days": 109
+    }
+  },
+  "inputs": {
+    "SST": {
+      "dataset_id": "METOFFICE-GLO-SST-L4-REP-OBS-SST",
+      "variable": "analysed_sst",
+      "native_res_deg": "0.125",
+      "native_temporal": "daily",
+      "units": "degC"
+    },
+    "SSS": {
+      "dataset_id": "cmems_obs-mob_glo_phy-sss_my_multi_P1D",
+      "variable": "sos",
+      "native_res_deg": "0.125",
+      "native_temporal": "daily",
+      "units": "PSU"
+    },
+    "SLA": {
+      "dataset_id": "cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.125deg_P1D",
+      "variable": "sla",
+      "native_res_deg": "0.125",
+      "native_temporal": "daily",
+      "units": "m"
+    },
+    "CURRENT_U": {
+      "dataset_id": "cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.125deg_P1D",
+      "variable": "ugos",
+      "native_res_deg": "0.125",
+      "native_temporal": "daily",
+      "units": "m/s"
+    },
+    "CURRENT_V": {
+      "dataset_id": "cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.125deg_P1D",
+      "variable": "vgos",
+      "native_res_deg": "0.125",
+      "native_temporal": "daily",
+      "units": "m/s"
+    },
+    "WIND_U": {
+      "dataset_id": "cmems_obs-wind_glo_phy_my_l4_0.125deg_PT1H",
+      "variable": "eastward_wind",
+      "native_res_deg": "0.125",
+      "native_temporal": "hourly->daily_mean",
+      "units": "m/s"
+    },
+    "WIND_V": {
+      "dataset_id": "cmems_obs-wind_glo_phy_my_l4_0.125deg_PT1H",
+      "variable": "northward_wind",
+      "native_res_deg": "0.125",
+      "native_temporal": "hourly->daily_mean",
+      "units": "m/s"
+    }
+  },
+  "target": {
+    "dataset_id": "cmems_mod_glo_phy_my_0.083deg_P1D-m",
+    "variable": "thetao",
+    "native_res_deg": "0.083",
+    "native_temporal": "daily",
+    "units": "degC",
+    "depths_m": [
+      0,
+      5,
+      10,
+      20,
+      30,
+      50,
+      75,
+      100,
+      125,
+      150,
+      200,
+      300,
+      500,
+      700,
+      1000
+    ]
+  },
+  "regrid_method": "bilinear (xarray.interp linear)",
+  "depth_interp_method": "linear (xarray.interp / scipy.interp1d)",
+  "wind_aggregation": "daily_mean_of_hourly",
+  "missing_value_strategy": "retain NaN \u2014 no zero-fill",
+  "land_mask_strategy": "NaN in >=95% of SST timesteps",
+  "ocean_cell_pct": 71.25,
+  "normalization_stats": {
+    "SST": {
+      "mean": 28.91894,
+      "std": 1.231142,
+      "min": 20.287493,
+      "max": 33.194993,
+      "n_valid": 2034802
+    },
+    "SSS": {
+      "mean": 32.459483,
+      "std": 1.178485,
+      "min": 24.615934,
+      "max": 35.431183,
+      "n_valid": 2003631
+    },
+    "SLA": {
+      "mean": 0.121251,
+      "std": 0.095589,
+      "min": -0.475575,
+      "max": 0.717325,
+      "n_valid": 2054731
+    },
+    "CURRENT_U": {
+      "mean": -0.023649,
+      "std": 0.220167,
+      "min": -2.328425,
+      "max": 2.253575,
+      "n_valid": 2045022
+    },
+    "CURRENT_V": {
+      "mean": 0.0148,
+      "std": 0.209896,
+      "min": -2.044925,
+      "max": 2.03865,
+      "n_valid": 2045022
+    },
+    "WIND_U": {
+      "mean": 0.28958,
+      "std": 3.641254,
+      "min": -17.175417,
+      "max": 19.779271,
+      "n_valid": 2704723
+    },
+    "WIND_V": {
+      "mean": 0.415477,
+      "std": 3.422649,
+      "min": -16.604375,
+      "max": 19.321979,
+      "n_valid": 2704723
+    }
+  },
+  "depth_coverage": {
+    "0": {
+      "valid_cell_pct": 72.68,
+      "overall_nan_pct": 27.32
+    },
+    "5": {
+      "valid_cell_pct": 72.68,
+      "overall_nan_pct": 27.32
+    },
+    "10": {
+      "valid_cell_pct": 70.05,
+      "overall_nan_pct": 29.95
+    },
+    "20": {
+      "valid_cell_pct": 68.26,
+      "overall_nan_pct": 31.74
+    },
+    "30": {
+      "valid_cell_pct": 66.7,
+      "overall_nan_pct": 33.3
+    },
+    "50": {
+      "valid_cell_pct": 64.61,
+      "overall_nan_pct": 35.39
+    },
+    "75": {
+      "valid_cell_pct": 62.46,
+      "overall_nan_pct": 37.54
+    },
+    "100": {
+      "valid_cell_pct": 60.62,
+      "overall_nan_pct": 39.38
+    },
+    "125": {
+      "valid_cell_pct": 60.12,
+      "overall_nan_pct": 39.88
+    },
+    "150": {
+      "valid_cell_pct": 59.8,
+      "overall_nan_pct": 40.2
+    },
+    "200": {
+      "valid_cell_pct": 59.08,
+      "overall_nan_pct": 40.92
+    },
+    "300": {
+      "valid_cell_pct": 58.33,
+      "overall_nan_pct": 41.67
+    },
+    "500": {
+      "valid_cell_pct": 56.59,
+      "overall_nan_pct": 43.41
+    },
+    "700": {
+      "valid_cell_pct": 55.43,
+      "overall_nan_pct": 44.57
+    },
+    "1000": {
+      "valid_cell_pct": 53.34,
+      "overall_nan_pct": 46.66
+    }
+  },
+  "X_shape_full": [
+    730,
+    7,
+    69,
+    81
+  ],
+  "Y_shape_full": [
+    730,
+    15,
+    69,
+    81
+  ],
+  "channel_order": [
+    "SST",
+    "SSS",
+    "SLA",
+    "CURRENT_U",
+    "CURRENT_V",
+    "WIND_U",
+    "WIND_V"
+  ],
+  "depth_order": [
+    0,
+    5,
+    10,
+    20,
+    30,
+    50,
+    75,
+    100,
+    125,
+    150,
+    200,
+    300,
+    500,
+    700,
+    1000
+  ],
+  "missing_dates_per_var": {
+    "SST": 0,
+    "SSS": 0,
+    "SLA": 0,
+    "CURRENT_U": 0,
+    "CURRENT_V": 0,
+    "WIND_U": 0,
+    "WIND_V": 0,
+    "GLORYS": 0
+  },
+  "native_glorys_depths": [
+    0.494,
+    1.5414,
+    2.6457,
+    3.8195,
+    5.0782,
+    6.4406,
+    7.9296,
+    9.573,
+    11.405,
+    13.4671,
+    15.8101,
+    18.4956,
+    21.5988,
+    25.2114,
+    29.4447,
+    34.4342,
+    40.3441,
+    47.3737,
+    55.7643,
+    65.8073,
+    77.8539,
+    92.3261,
+    109.7293,
+    130.666,
+    155.8507,
+    186.1256,
+    222.4752,
+    266.0403,
+    318.1274,
+    380.213,
+    453.9377,
+    541.0889,
+    643.5668,
+    763.3331,
+    902.3393,
+    1062.4399
+  ]
+}

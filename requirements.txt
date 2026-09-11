@@ -1,0 +1,14 @@
+numpy
+pandas
+scipy
+scikit-learn
+xarray
+netCDF4
+h5netcdf
+zarr
+matplotlib
+torch
+copernicusmarine
+pyyaml
+requests
+tqdm

@@ -1,0 +1,66 @@
+# OceanEmbed Prototype Configuration
+
+region:
+  name: "Bay of Bengal"
+  lat_min: 5.0
+  lat_max: 22.0
+  lon_min: 80.0
+  lon_max: 100.0
+  spatial_resolution: 0.25  # degrees
+
+time:
+  start_date: "2022-01-01"
+  end_date: "2023-12-31"
+  frequency: "1D"
+
+sample_time:
+  start_date: "2022-01-01"
+  end_date: "2022-01-07"
+
+target_depths: [0, 5, 10, 20, 30, 50, 75, 100, 125, 150, 200, 300, 500, 700, 1000]
+
+inputs:
+  sst:
+    product_id: "SST_GLO_SST_L4_REP_OBSERVATIONS_010_011"
+    dataset_id: "METOFFICE-GLO-SST-L4-REP-OBS-SST"
+    variable: "analysed_sst"
+  sss:
+    product_id: "MULTIOBS_GLO_PHY_S_SURFACE_MYNRT_015_013"
+    dataset_id: "cmems_obs-mob_glo_phy-sss_my_multi_P1D"
+    variable: "sos"
+    type_description: "daily observation-based satellite/in-situ SSS analysis"
+  sla:
+    product_id: "SEALEVEL_GLO_PHY_L4_MY_008_047"
+    dataset_id: "cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.125deg_P1D"
+    variable: "sla"
+  current_u:
+    product_id: "SEALEVEL_GLO_PHY_L4_MY_008_047"
+    dataset_id: "cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.125deg_P1D"
+    variable: "ugos"
+    type_description: "satellite-altimetry-derived geostrophic surface current zonal component"
+  current_v:
+    product_id: "SEALEVEL_GLO_PHY_L4_MY_008_047"
+    dataset_id: "cmems_obs-sl_glo_phy-ssh_my_allsat-l4-duacs-0.125deg_P1D"
+    variable: "vgos"
+    type_description: "satellite-altimetry-derived geostrophic surface current meridional component"
+  wind_u:
+    product_id: "WIND_GLO_PHY_L4_MY_012_006"
+    dataset_id: "cmems_obs-wind_glo_phy_my_l4_0.125deg_PT1H"
+    variable: "eastward_wind"
+    type_description: "satellite-observation-informed L4 wind product, bias-corrected using scatterometer observations (incorporates ERA5 model fields)"
+  wind_v:
+    product_id: "WIND_GLO_PHY_L4_MY_012_006"
+    dataset_id: "cmems_obs-wind_glo_phy_my_l4_0.125deg_PT1H"
+    variable: "northward_wind"
+    type_description: "satellite-observation-informed L4 wind product, bias-corrected using scatterometer observations (incorporates ERA5 model fields)"
+
+target:
+  glorys_3d_temp:
+    product_id: "GLOBAL_MULTIYEAR_PHY_001_030"
+    dataset_id: "cmems_mod_glo_phy_my_0.083deg_P1D-m"
+    variable: "thetao"
+
+validation:
+  argo_in_situ:
+    product_id: "INSITU_GLO_PHY_SITU_OBS_MY_013_001"
+    dataset_id: "cmems_obs-ins_glo_phy-cur_my_argo_irr"
