@@ -9,7 +9,8 @@ This document provides a comprehensive inventory of all source code files, confi
 | File Name | File Size | Description & Parameters | Status |
 | :--- | :---: | :--- | :--- |
 | [`cnn_baseline_best.pt`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/models/cnn_baseline_best.pt) | 2.33 MB | PyTorch checkpoint for Model A (CNN Baseline, 191,631 parameters). Saved at Epoch 49 with best validation loss 0.575807 $^{\circ}\text{C}^2$. | **VERIFIED & FROZEN** |
-| [`oceanembed_best.pt`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/models/oceanembed_best.pt) | 204.77 MB | PyTorch checkpoint for Model B (OceanEmbed Framework, 8,670,241 parameters). Saved at Epoch 34 with best validation loss 0.622848 $^{\circ}\text{C}^2$. | **VERIFIED & FROZEN** |
+| [`cbam_cnn_best.pt`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/models/cbam_cnn_best.pt) | 2.40 MB | PyTorch checkpoint for Model B (CBAM-CNN, 195,705 parameters). Saved with best validation loss 0.582082 $^{\circ}\text{C}^2$. | **VERIFIED & FROZEN** |
+| [`oceanembed_best.pt`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/models/oceanembed_best.pt) | 204.77 MB | PyTorch checkpoint for Model C (OceanEmbed Framework, 8,670,241 parameters). Saved at Epoch 34 with best validation loss 0.622848 $^{\circ}\text{C}^2$. | **VERIFIED & FROZEN** |
 
 ---
 
@@ -17,11 +18,11 @@ This document provides a comprehensive inventory of all source code files, confi
 
 | File Name | File Size | Description | Status |
 | :--- | :---: | :--- | :--- |
-| [`evaluation_summary.json`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/metrics/evaluation_summary.json) | 3.27 KB | Full test set evaluation metrics (RMSE, MAE, $R^2$) for CNN Baseline and OceanEmbed overall and per-depth. | **GENERATED** |
-| [`per_depth_metrics.csv`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/metrics/per_depth_metrics.csv) | 814 B | Tabular CSV recording per-depth RMSE and MAE across all 15 SIH target depths. | **GENERATED** |
+| [`evaluation_summary.json`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/metrics/evaluation_summary.json) | 4.80 KB | Full test set evaluation metrics (RMSE, MAE, $R^2$) for CNN Baseline, CBAM-CNN, and OceanEmbed overall and per-depth. | **GENERATED** |
+| [`per_depth_metrics.csv`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/metrics/per_depth_metrics.csv) | 1.25 KB | Tabular CSV recording per-depth RMSE and MAE across all 15 SIH target depths. | **GENERATED** |
 | [`cnn_baseline_history.json`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/metrics/cnn_baseline_history.json) | 2.20 KB | Per-epoch training and validation loss history and timing for Model A. | **GENERATED** |
-| [`oceanembed_history.json`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/metrics/oceanembed_history.json) | 2.08 KB | Per-epoch training and validation loss history and timing for Model B. | **GENERATED** |
-| [`test_predictions.npz`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/metrics/test_predictions.npz) | 81.48 MB | Saved model predictions (`cnn_preds`, `oe_preds`) and targets over the 109 test days. | **GENERATED** |
+| [`cbam_cnn_history.json`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/metrics/cbam_cnn_history.json) | 2.30 KB | Per-epoch training and validation loss history and timing for Model B. | **GENERATED** |
+| [`oceanembed_history.json`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/metrics/oceanembed_history.json) | 2.08 KB | Per-epoch training and validation loss history and timing for Model C. | **GENERATED** |
 
 ---
 
@@ -35,13 +36,22 @@ This document provides a comprehensive inventory of all source code files, confi
 
 ---
 
-## 4. Visualization Figures (`results/figures/`)
+## 4. Visualization Figures (12 Figures in `results/figures/`)
 
-| File Name | File Size | Figure Description | Status |
-| :--- | :---: | :--- | :--- |
-| [`reconstruction_maps.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/reconstruction_maps.png) | 600.18 KB | 2D Spatial temperature reconstruction maps (Target vs OceanEmbed vs Error) at 0m, 100m, 500m, 1000m. | **GENERATED** |
-| [`depth_wise_rmse.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/depth_wise_rmse.png) | 113.83 KB | Comparative log-scale depth profile plot of RMSE (°C) for CNN Baseline vs OceanEmbed. | **GENERATED** |
-| [`embedding_pca.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/embedding_pca.png) | 149.13 KB | Exploratory 2D PCA scatter plot of learned spatial ocean embeddings colored by test set month. | **GENERATED** |
+| File Name | Figure Description | Evaluation Arena |
+| :--- | :--- | :--- |
+| [`argo_scatter.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/argo_scatter.png) | 4-panel Predicted vs Observed scatter plot for GLORYS, CNN, CBAM, and OceanEmbed ($N=3,509$). | Independent Argo |
+| [`argo_profile_comparison.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/argo_profile_comparison.png) | Vertical profile comparisons across 4 representative float locations ($0\text{--}1000\text{ m}$). | Independent Argo |
+| [`argo_depth_rmse.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/argo_depth_rmse.png) | Per-depth RMSE profile comparing all models against in-situ Argo observations. | Independent Argo |
+| [`argo_depth_bias.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/argo_depth_bias.png) | Per-depth Mean Bias profile showing positive offset across models. | Independent Argo |
+| [`argo_error_distribution.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/argo_error_distribution.png) | Residual prediction error distributions for all three models. | Independent Argo |
+| [`argo_validation_locations.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/argo_validation_locations.png) | Geographical map of the 253 matched float coordinates in the Bay of Bengal. | Independent Argo |
+| [`reconstruction_maps.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/reconstruction_maps.png) | 2D Spatial temperature reconstruction maps (Target vs OceanEmbed vs Error) at 0m, 50m, 100m, 500m. | GLORYS Test Set |
+| [`cbam_reconstruction_maps.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/cbam_reconstruction_maps.png) | 2D Spatial temperature reconstruction maps for CBAM-CNN at 0m, 50m, 100m, 500m. | GLORYS Test Set |
+| [`cbam_vs_all_depth_rmse.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/cbam_vs_all_depth_rmse.png) | Per-depth RMSE comparison across all 3 models on the GLORYS test grid. | GLORYS Test Set |
+| [`cbam_vs_all_depth_mae.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/cbam_vs_all_depth_mae.png) | Per-depth MAE comparison across all 3 models on the GLORYS test grid. | GLORYS Test Set |
+| [`depth_wise_rmse.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/depth_wise_rmse.png) | Comparative log-scale depth profile plot of RMSE (°C) for CNN Baseline vs OceanEmbed. | GLORYS Test Set |
+| [`embedding_pca.png`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/results/figures/embedding_pca.png) | Exploratory 2D PCA scatter plot of learned spatial ocean embeddings colored by test set month. | Latent Analysis |
 
 ---
 
@@ -62,10 +72,8 @@ This document provides a comprehensive inventory of all source code files, confi
 
 | File Name | Description | Status |
 | :--- | :--- | :--- |
-| [`FINAL_END_TO_END_PROJECT_REPORT.md`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/docs/FINAL_END_TO_END_PROJECT_REPORT.md) | Comprehensive 20-part research-grade project report detailing the complete experiment from acquisition to results. | **COMPLETE** |
+| [`FINAL_END_TO_END_REPORT.md`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/docs/FINAL_END_TO_END_REPORT.md) | The single canonical research-grade final technical report detailing the complete experiment and validation. | **CANONICAL** |
 | [`PROJECT_ARTIFACT_INVENTORY.md`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/docs/PROJECT_ARTIFACT_INVENTORY.md) | Complete file and artifact registry (this document). | **COMPLETE** |
 | [`EXPERIMENT_TIMELINE.md`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/docs/EXPERIMENT_TIMELINE.md) | Chronological development history detailing every stage of the project. | **COMPLETE** |
 | [`DATA_SOURCES.md`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/docs/DATA_SOURCES.md) | Copernicus product catalogue specification and scientific boundary rules. | **FROZEN** |
-| [`STAGE3_DATASET_REPORT.md`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/docs/STAGE3_DATASET_REPORT.md) | Preprocessing and dataset summary report. | **FROZEN** |
-| [`STAGE3_FINAL_AUDIT.md`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/docs/STAGE3_FINAL_AUDIT.md) | Data integrity audit log verifying tensor shapes and non-leakage. | **FROZEN** |
-| [`STAGE4_MODEL_REPORT.md`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/docs/STAGE4_MODEL_REPORT.md) | Initial Stage 4 model architecture and training report. | **FROZEN** |
+| [`PROJECT_PLAN.md`](file:///c:/Users/arush/OneDrive/Desktop/oceanembedPrototype/docs/PROJECT_PLAN.md) | Original architectural requirements and project plan. | **FROZEN** |
