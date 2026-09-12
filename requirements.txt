@@ -1,22 +1,22 @@
-# OceanEmbed Streamlit Dashboard — Runtime Dependencies
-# Pin versions to ensure reproducibility across deployment environments.
-# Install with: pip install -r requirements.txt
+# OceanEmbed Streamlit Dashboard — Streamlit Cloud Runtime Dependencies
+# CPU-only deployment — no CUDA required.
 
 # Core scientific stack
-numpy>=2.0.0
+numpy>=1.24.0,<3.0.0
 pandas>=2.0.0
 scipy>=1.11.0
 
-# Deep learning (CPU-only inference — no CUDA required)
+# Deep learning — CPU wheel (avoids pulling heavy CUDA libs on cloud)
+--extra-index-url https://download.pytorch.org/whl/cpu
 torch>=2.0.0
 
-# Ocean data formats
+# Visualization & dashboard
+streamlit>=1.35.0
+plotly>=5.18.0
+
+# Ocean data formats (requires libhdf5-dev / libnetcdf-dev from packages.txt)
 xarray>=2023.1.0
 netCDF4>=1.6.0
-
-# Visualization & dashboard
-streamlit>=1.63.0
-plotly>=7.0.0
 
 # Utilities
 PyYAML>=6.0

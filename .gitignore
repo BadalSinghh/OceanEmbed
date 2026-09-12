@@ -15,11 +15,9 @@ data/processed/*.npy
 data/processed/**/*.nc
 data/processed/*.nc
 
-# Large embeddings, predictions, and model weights (>100MB)
-*.npz
-*.pt
+# Large model weights — tracked via Git LFS (not gitignored)
+# *.pt files are stored in Git LFS automatically via .gitattributes
 results/embeddings/
-results/models/
 results/metrics/*.npz
 
 # Operating system artifacts & temporary logs
