@@ -1,14 +1,22 @@
-numpy
-pandas
-scipy
-scikit-learn
-xarray
-netCDF4
-h5netcdf
-zarr
-matplotlib
-torch
-copernicusmarine
-pyyaml
-requests
-tqdm
+# OceanEmbed Streamlit Dashboard — Runtime Dependencies
+# Pin versions to ensure reproducibility across deployment environments.
+# Install with: pip install -r requirements.txt
+
+# Core scientific stack
+numpy>=2.0.0
+pandas>=2.0.0
+scipy>=1.11.0
+
+# Deep learning (CPU-only inference — no CUDA required)
+torch>=2.0.0
+
+# Ocean data formats
+xarray>=2023.1.0
+netCDF4>=1.6.0
+
+# Visualization & dashboard
+streamlit>=1.63.0
+plotly>=7.0.0
+
+# Utilities
+PyYAML>=6.0

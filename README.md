@@ -1,53 +1,89 @@
-# OceanEmbed Prototype (SIH26066)
-## Deep Learning Framework for Subsurface Ocean Temperature Reconstruction from Satellite Observations
+# OceanEmbed — Subsurface Ocean Digital Twin
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![PyTorch 2.x](https://img.shields.io/badge/PyTorch-2.x-orange.svg)](https://pytorch.org/)
-[![Status](https://img.shields.io/badge/Status-Validated%20Real%20Argo%20Data-brightgreen.svg)]()
-
----
-
-### Canonical Technical Documentation
-
-For the complete, end-to-end scientific methodology, architectural formulations, training details, reanalysis benchmark, and independent in-situ CORA delayed-mode Argo validation, see:
-
-👉 **[docs/FINAL_END_TO_END_REPORT.md](docs/FINAL_END_TO_END_REPORT.md)** 👈
+Deep learning framework for reconstructing the 3-D vertical ocean temperature
+column (0 to 1000 m, 15 standard depth levels) from daily multi-satellite
+surface observables over the Bay of Bengal (5–22 N, 80–100 E).
 
 ---
 
-### Key Research Results at a Glance
+## Quick Start
 
-Reconstructing 15 subsurface depth levels ($0\text{--}1000\text{ m}$) across the Bay of Bengal ($5\text{--}22^\circ\text{N}$, $80\text{--}100^\circ\text{E}$) from 7 surface observable channels (SST, SSS, SLA, Geostrophic Currents U/V, 10m Wind U/V).
+```bash
+# 1. Install dependencies (CPU only, no GPU required)
+pip install -r requirements.txt
 
-| Model Architecture | Parameters | Independent Argo RMSE (°C) | Independent Argo MAE (°C) | Pearson $R$ | GLORYS Test RMSE (°C) |
-|---|:---:|:---:|:---:|:---:|:---:|
-| **GLORYS12 (Reanalysis Reference)** | — | 0.8061 | 0.4565 | 0.9958 | — |
-| **CNN Baseline** | **191,631** | **1.1611** | **0.6834** | **0.9912** | **1.1796** |
-| **CBAM-CNN (Attention)** | 195,705 | 1.3777 | 0.7905 | 0.9874 | 1.3531 |
-| **OceanEmbed (CNN+FNO2D)** | 8,670,241 | 1.7113 | 1.1496 | 0.9811 | 1.4736 |
-| **Climatology Baseline** | 0 | 2.0253 | 1.2297 | 0.9766 | 1.8730 |
-
-- **Validation Dataset**: 253 unique QC-passed CORA delayed-mode Argo profiles comprising 3,509 matched depth observations across the held-out test period (2023-09-14 to 2023-12-31).
-- **Core Finding**: Spaceborne multi-satellite surface observables contain strong dynamical signal ($R > 0.98$) to reconstruct full vertical thermal stratification from 0 to 1000m. CNN Baseline delivers the best overall accuracy, while CBAM-CNN achieves the highest surface mixed layer precision ($0\text{--}30\text{ m}$, $0.610^\circ\text{C}$).
-
----
-
-### Quickstart & Reproduction
-
-```powershell
-# 1. Activate Environment
-.venv\Scripts\Activate.ps1
-
-# 2. Run Preprocessing & Model Training
-python scripts/05_preprocess.py
-python scripts/07_train_cnn.py
-python scripts/11_train_cbam_cnn.py
-python scripts/08_train_oceanembed.py
-
-# 3. Evaluate & Validate Against Real CORA Argo Profiles
-python scripts/09_evaluate.py
-python scripts/12_evaluate_cbam_cnn.py
-python scripts/13_process_argo_and_validate.py
-python scripts/regenerate_argo_figures.py
-python scripts/generate_argo_profile_comparisons.py
+# 2. Launch the Streamlit dashboard
+streamlit run app.py
 ```
+
+Then open http://localhost:8501 in your browser.
+
+---
+
+## Directory Structure
+
+```
+oceanEmbed-Prototype/
+├── app.py                          # Streamlit dashboard entry point
+├── requirements.txt                # Runtime dependencies
+├── src/
+│   ├── ui_helpers.py               # Cached loaders, inference, Plotly helpers
+│   └── models/
+│       ├── cnn_baseline.py         # CNN Baseline (191,631 params)
+│       ├── cbam.py                 # CBAM-CNN with channel+spatial attention
+│       ├── ocean_embed.py          # OceanEmbed CNN + FNO2D (8.67M params)
+│       ├── cnn_encoder.py
+│       ├── depth_decoder.py
+│       ├── fno2d.py
+│       └── losses.py
+├── data/
+│   └── processed/
+│       ├── coords.nc               # Lat/Lon/Depth grid coordinates
+│       ├── land_mask.npy           # Boolean land mask [69, 81]
+│       └── test/
+│           ├── X_test.npz          # Normalized satellite inputs [109, 7, 69, 81]
+│           ├── Y_test.npz          # GLORYS12 subsurface targets [109, 15, 69, 81]
+│           └── dates_test.npy      # Test period dates (Sep–Dec 2023)
+└── results/
+    ├── models/
+    │   ├── cnn_baseline_best.pt    # CNN Baseline checkpoint (~2.3 MB)
+    │   ├── cbam_cnn_best.pt        # CBAM-CNN checkpoint (~2.4 MB)
+    │   └── oceanembed_best.pt      # OceanEmbed checkpoint (~205 MB)
+    ├── normalization_stats.json    # Channel mean/std computed on training set
+    ├── argo_validation/
+    │   └── argo_matched_observations.csv   # 3,509 real CORA Argo observations
+    └── metrics/
+        ├── evaluation_summary.json
+        ├── per_depth_metrics.csv
+        ├── cnn_baseline_history.json
+        ├── cbam_cnn_history.json
+        └── oceanembed_history.json
+```
+
+---
+
+## Dashboard Sections
+
+| Section | Description |
+| :--- | :--- |
+| 3D Subsurface Reconstruction | Date and depth selector, 3-panel heatmaps (GT / Pred / Error), vertical transect |
+| Argo Float Validation | 253 CORA Argo float locations, per-float depth profile comparison |
+| Models and Benchmark | Leaderboard table, per-depth RMSE curves, training convergence plots |
+| Live Point Profiler | Coordinate picker, instantaneous CPU inference, vertical profile output |
+| Scientific Documentation | Full methodology, data sources, model architecture descriptions |
+
+---
+
+## Model Performance (Independent Argo Validation)
+
+| Architecture | Argo RMSE | Argo MAE | Pearson R |
+| :--- | :---: | :---: | :---: |
+| GLORYS12 Reanalysis (reference) | 0.8061 C | 0.4565 C | 0.9958 |
+| **CNN Baseline** | **1.1611 C** | **0.6834 C** | **0.9912** |
+| CBAM-CNN | 1.3777 C | 0.7905 C | 0.9874 |
+| OceanEmbed (FNO2D) | 1.7113 C | 1.1496 C | 0.9811 |
+| Climatology baseline | 2.0253 C | 1.2297 C | 0.9766 |
+
+Validation dataset: 253 unique QC-passed CORA delayed-mode Argo profiles,
+3,509 matched depth observations, test period 2023-09-14 to 2023-12-31.
+No Argo data was used during model training.
