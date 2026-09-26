@@ -3,10 +3,12 @@ services:
     name: oceanembed-api
     runtime: python
     rootDir: .
-    buildCommand: git lfs pull && pip install -r backend/requirements.txt
+    buildCommand: pip install --upgrade pip && pip install -r backend/requirements.txt
     startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
     plan: free
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
       - key: ALLOWED_ORIGINS
         value: http://localhost:3000,https://ocean-embed.vercel.app
       - key: PYTHONUNBUFFERED
