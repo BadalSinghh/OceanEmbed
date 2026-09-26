@@ -1,0 +1,22 @@
+# OceanEmbed FastAPI Backend — Production Dependencies
+# CPU-only. Independent of root requirements.txt (Streamlit Cloud).
+
+# Web framework
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+
+# Scientific stack
+numpy>=1.24.0,<3.0.0
+scipy>=1.11.0
+pandas>=2.0.0
+
+# Deep learning — CPU wheel (avoids pulling heavy CUDA libs)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.0.0
+
+# Ocean data formats
+xarray>=2023.1.0
+netCDF4>=1.6.0
+
+# Misc
+PyYAML>=6.0

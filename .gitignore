@@ -25,3 +25,23 @@ results/metrics/*.npz
 Thumbs.db
 *.log
 scratch/
+
+# Frontend build artifacts & dependencies
+frontend/node_modules/
+frontend/.next/
+frontend/.vercel/
+
+# Environment variable files — NEVER commit these
+.env
+.env.local
+.env.production
+.env*.local
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# Agent/IDE artifacts
+.agents/
+.claude/
+skills-lock.json
+
