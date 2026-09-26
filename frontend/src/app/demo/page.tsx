@@ -74,8 +74,8 @@ export default function ReconstructionLabPage() {
           setDates(res.dates);
         }
       })
-      .catch(() => {
-        setErrorMsg("Backend unavailable. Ensure FastAPI server is running on :8000.");
+      .catch((err) => {
+        setErrorMsg(`Connecting to inference API... (${err instanceof Error ? err.message : "server waking up"}). Click Run Reconstruction to retry.`);
       });
   }, []);
 
