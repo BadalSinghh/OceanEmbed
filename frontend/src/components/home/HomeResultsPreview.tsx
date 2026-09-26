@@ -16,7 +16,7 @@ export default function HomeResultsPreview() {
   const [depthData, setDepthData] = useState<PerDepthRow[]>([]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"}/api/results/per-depth`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL || "https://oceanembed-1-555s.onrender.com"}/api/results/per-depth`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch");
         return res.json();

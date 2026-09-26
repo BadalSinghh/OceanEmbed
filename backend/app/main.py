@@ -56,7 +56,7 @@ app.include_router(predict.router, prefix="/api")
 app.include_router(results.router, prefix="/api")
 
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 async def root():
     return {
         "service": "OceanEmbed API",

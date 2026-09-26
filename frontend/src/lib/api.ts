@@ -1,7 +1,7 @@
 // frontend/src/lib/api.ts
 // Typed API client for the OceanEmbed FastAPI backend
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://oceanembed-1-555s.onrender.com";
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
