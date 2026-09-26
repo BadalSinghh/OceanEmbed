@@ -91,7 +91,7 @@ export default function HomePage() {
             <span>/ OBSERVATIONAL SURFACE BOUNDARY</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-light text-white tracking-tight">
-            The surface is only the beginning.
+            Observational surface boundary.
           </h2>
           <p className="text-neutral-300 text-base sm:text-lg leading-relaxed font-sans pt-2">
             Spaceborne remote sensing satellites observe the continuous two-dimensional boundary

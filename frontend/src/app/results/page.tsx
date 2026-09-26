@@ -252,7 +252,7 @@ export default function ResultsPage() {
               >
                 {argoProfiles.map((p) => (
                   <option key={p.profile_id} value={p.profile_id}>
-                    {p.profile_id} — {p.date?.slice(0, 10)} ({p.lat?.toFixed(1)}°N, {p.lon?.toFixed(1)}°E)
+                    {p.profile_id}, {p.date?.slice(0, 10)} ({p.lat?.toFixed(1)}°N, {p.lon?.toFixed(1)}°E)
                   </option>
                 ))}
               </select>

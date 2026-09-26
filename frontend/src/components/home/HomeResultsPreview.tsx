@@ -50,7 +50,6 @@ export default function HomeResultsPreview() {
   const depths = depthData.map((d) => d.depth_m);
   const oeErrors = depthData.map((d) => d.oceanembed_rmse);
   const cbamErrors = depthData.map((d) => d.cbam_rmse);
-  const cnnErrors = depthData.map((d) => d.cnn_rmse);
 
   const plotTraces = [
     {
@@ -58,7 +57,7 @@ export default function HomeResultsPreview() {
       y: depths,
       type: "scatter",
       mode: "lines+markers",
-      name: "OceanEmbed (CNN + FNO)",
+      name: "OceanEmbed (CNN+FNO2D)",
       line: { color: "#06b6d4", width: 2.6 },
       marker: { color: "#06b6d4", size: 6 },
     },
@@ -67,18 +66,9 @@ export default function HomeResultsPreview() {
       y: depths,
       type: "scatter",
       mode: "lines+markers",
-      name: "CBAM-CNN",
+      name: "CBAM-CNN (Attention)",
       line: { color: "#f59e0b", width: 1.8, dash: "dot" },
       marker: { color: "#f59e0b", size: 5 },
-    },
-    {
-      x: cnnErrors,
-      y: depths,
-      type: "scatter",
-      mode: "lines+markers",
-      name: "CNN Baseline",
-      line: { color: "#818cf8", width: 1.6, dash: "dash" },
-      marker: { color: "#818cf8", size: 4 },
     },
   ];
 
@@ -140,28 +130,22 @@ export default function HomeResultsPreview() {
             </thead>
             <tbody>
               <tr>
-                <td className="text-white font-medium font-sans">OceanEmbed (CNN + FNO)</td>
-                <td className="text-white font-bold">1.259 °C</td>
-                <td className="text-white font-bold">1.378 °C</td>
-                <td className="text-white font-bold">0.987</td>
+                <td className="text-white font-medium font-sans">OceanEmbed (CNN+FNO2D)</td>
+                <td className="text-white font-bold">1.3777 °C</td>
+                <td className="text-white font-bold">1.3777 °C</td>
+                <td className="text-white font-bold">0.9874</td>
               </tr>
               <tr>
-                <td className="text-neutral-300 font-sans">CBAM-CNN</td>
-                <td>1.482 °C</td>
-                <td>1.711 °C</td>
-                <td>0.981</td>
-              </tr>
-              <tr>
-                <td className="text-neutral-400 font-sans">CNN Baseline</td>
-                <td>1.541 °C</td>
-                <td>1.854 °C</td>
-                <td>0.978</td>
+                <td className="text-neutral-300 font-sans">CBAM-CNN (Attention)</td>
+                <td>1.7113 °C</td>
+                <td>1.7113 °C</td>
+                <td>0.9811</td>
               </tr>
               <tr>
                 <td className="text-neutral-500 font-sans">Climatology</td>
-                <td className="text-neutral-500">1.873 °C</td>
-                <td className="text-neutral-500">2.025 °C</td>
-                <td className="text-neutral-500">0.977</td>
+                <td className="text-neutral-500">2.0253 °C</td>
+                <td className="text-neutral-500">2.0253 °C</td>
+                <td className="text-neutral-500">0.9766</td>
               </tr>
             </tbody>
           </table>

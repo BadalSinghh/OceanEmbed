@@ -41,33 +41,33 @@ async def get_models():
     return ModelsResponse(
         models=[
             ModelInfo(
-                id="cbam_cnn",
-                name="OceanEmbed (CNN + FNO)",
-                parameters=195705,
-                architecture="OceanEmbed (CNN + FNO)",
+                id="ocean_embed",
+                name="OceanEmbed (CNN+FNO2D)",
+                parameters=8670241,
+                architecture="OceanEmbed (CNN+FNO2D)",
                 description=(
                     "Convolutional encoder-decoder with spectral integral Fourier operator. "
                     "Extracts multiscale spatial dynamics and projects to 15 vertical ocean depth levels."
                 ),
-                test_rmse=1.353119,
-                test_mae=0.798432,
-                test_r2=0.973504,
+                test_rmse=1.3777,
+                test_mae=0.7905,
+                test_r2=0.9720,
                 argo_rmse=1.3777,
                 argo_mae=0.7905,
                 pearson_r=0.9874,
             ),
             ModelInfo(
-                id="ocean_embed",
-                name="CBAM-CNN",
-                parameters=8670241,
+                id="cbam_cnn",
+                name="CBAM-CNN (Attention)",
+                parameters=195705,
                 architecture="CBAM-CNN Attention Baseline",
                 description=(
                     "Dual-attention convolutional baseline with channel and spatial attention gates. "
                     "Dynamically weights surface variables and spatial regions."
                 ),
-                test_rmse=1.47362,
-                test_mae=0.988231,
-                test_r2=0.968575,
+                test_rmse=1.7113,
+                test_mae=1.1496,
+                test_r2=0.9568,
                 argo_rmse=1.7113,
                 argo_mae=1.1496,
                 pearson_r=0.9811,

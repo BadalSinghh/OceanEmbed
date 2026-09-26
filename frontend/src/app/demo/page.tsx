@@ -33,8 +33,8 @@ const SoundingProfilePlotly = dynamic(() => import("@/components/demo/SoundingPr
 const TARGET_DEPTHS = [0, 5, 10, 20, 30, 50, 75, 100, 125, 150, 200, 300, 500, 700, 1000];
 
 const MODELS = [
-  { id: "cbam_cnn", name: "OceanEmbed (CNN + FNO)", type: "Operator Learning", params: "2.75M" },
-  { id: "ocean_embed", name: "CBAM-CNN", type: "Attention Baseline", params: "1.84M" },
+  { id: "ocean_embed", name: "OceanEmbed (CNN+FNO2D)", type: "Operator Learning", params: "8,670,241" },
+  { id: "cbam_cnn", name: "CBAM-CNN (Attention)", type: "Attention Baseline", params: "195,705" },
 ];
 
 const SURFACE_CHANNELS = [
@@ -53,7 +53,7 @@ type FieldType = "prediction" | "groundTruth" | "error";
 export default function ReconstructionLabPage() {
   const [dates, setDates] = useState<string[]>([]);
   const [sampleIdx, setSampleIdx] = useState<number>(0);
-  const [modelId, setModelId] = useState<string>("cbam_cnn");
+  const [modelId, setModelId] = useState<string>("ocean_embed");
   const [depthIdx, setDepthIdx] = useState<number>(7); // 100m default
   const [vizMode, setVizMode] = useState<VizMode>("volume3d");
   const [fieldType, setFieldType] = useState<FieldType>("prediction");

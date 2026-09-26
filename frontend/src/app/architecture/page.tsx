@@ -75,7 +75,7 @@ const ARCHITECTURE_STAGES: LayerDetail[] = [
       "Inverse 2D Real FFT: x_out = irfft2(out_ft)",
       "Parallel 1×1 Conv2d local bypass + GELU non-linear activation",
     ],
-    mathEquation: "(\\mathcal{K}(v))(x) = \\mathcal{F}^{-1}\\big(R \\cdot (\\mathcal{F} v)\\big)(x) + W \\cdot v(x)",
+    mathEquation: "𝒦(v)(x) = ℱ⁻¹( R · (ℱv) )(x) + W · v(x)",
   },
   {
     id: "depth",
@@ -129,7 +129,7 @@ export default function ArchitecturePage() {
           <div className="pt-8 border-t border-white/[0.08] flex flex-wrap items-center gap-12 font-mono text-xs text-neutral-400">
             <div>
               <span className="text-neutral-500 uppercase text-[10px] block">Total Trainable Parameters</span>
-              <span className="text-white mt-0.5 block font-semibold">2,752,383 parameters</span>
+              <span className="text-white mt-0.5 block font-semibold">8,670,241 parameters</span>
             </div>
             <div>
               <span className="text-neutral-500 uppercase text-[10px] block">Operator Formulation</span>
@@ -226,25 +226,18 @@ export default function ArchitecturePage() {
             </thead>
             <tbody>
               <tr className="border-l-2 border-white">
-                <td className="text-white font-semibold font-sans">OceanEmbed (CNN + FNO)</td>
+                <td className="text-white font-semibold font-sans">OceanEmbed (CNN+FNO2D)</td>
                 <td className="text-neutral-300 font-sans">Fourier Neural Operator</td>
-                <td className="text-white font-bold">2,752,383</td>
+                <td className="text-white font-bold">8,670,241</td>
                 <td>oceanembed_best.pt (~205 MB)</td>
                 <td className="text-white font-bold">1.3777 °C</td>
               </tr>
               <tr>
-                <td className="text-neutral-200 font-sans">CBAM-CNN</td>
-                <td className="text-neutral-400 font-sans">Channel & Spatial Attention</td>
-                <td>1,844,143</td>
+                <td className="text-neutral-200 font-sans">CBAM-CNN (Attention)</td>
+                <td className="text-neutral-400 font-sans">Channel &amp; Spatial Attention</td>
+                <td>195,705</td>
                 <td>cbam_cnn_best.pt (~2.4 MB)</td>
                 <td>1.7113 °C</td>
-              </tr>
-              <tr>
-                <td className="text-neutral-300 font-sans">CNN Baseline</td>
-                <td className="text-neutral-400 font-sans">Standard 2D ConvNet</td>
-                <td>1,843,823</td>
-                <td>cnn_baseline_best.pt (~2.3 MB)</td>
-                <td>1.8540 °C</td>
               </tr>
             </tbody>
           </table>
