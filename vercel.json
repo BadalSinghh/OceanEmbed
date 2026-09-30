@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://ocean-embed-v2.vercel.app",
+      "permanent": true
+    }
+  ]
+}
